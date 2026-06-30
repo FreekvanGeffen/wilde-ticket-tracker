@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+ticket_tracker.log
+ticket_tracker.err.log
