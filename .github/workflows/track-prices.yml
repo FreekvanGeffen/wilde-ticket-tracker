@@ -2,8 +2,7 @@ name: Track ticket prices
 
 on:
   schedule:
-    # Every 15 minutes (UTC). GitHub may delay scheduled runs slightly.
-    - cron: "*/15 * * * *"
+    - cron: "1/15 * * * *"
   workflow_dispatch:
 
 permissions:
