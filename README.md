@@ -47,9 +47,7 @@ After that, the workflow runs every 15 minutes and commits new rows to `ticket_p
 ## Local run (optional)
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python -m playwright install chromium
-python ticket_price_tracker.py
+uv sync
+uv run playwright install chromium
+uv run python ticket_price_tracker.py
 ```

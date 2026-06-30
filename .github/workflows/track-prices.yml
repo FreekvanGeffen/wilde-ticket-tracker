@@ -22,28 +22,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: "3.12"
-          cache: pip
-          cache-dependency-path: requirements.txt
+          enable-cache: true
 
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt
+      - name: Install dependencies
+        run: uv sync
 
       - name: Cache Playwright browsers
         uses: actions/cache@v4
-        id: playwright-cache
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('requirements.txt') }}
+          key: ${{ runner.os }}-playwright-${{ hashFiles('pyproject.toml') }}
 
       - name: Install Playwright Chromium
-        run: python -m playwright install --with-deps chromium
+        run: uv run playwright install --with-deps chromium
 
       - name: Run price tracker
-        run: python ticket_price_tracker.py --csv ticket_price_history.csv
+        run: uv run python ticket_price_tracker.py --csv ticket_price_history.csv
 
       - name: Commit updated history
         run: |
