@@ -1,8 +1,6 @@
 name: Track ticket prices
 
-on:
-  schedule:
-    - cron: '0 * * * *'
+on:  
   workflow_dispatch:
 
 permissions:
