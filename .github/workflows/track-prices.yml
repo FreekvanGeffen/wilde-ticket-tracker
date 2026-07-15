@@ -2,9 +2,6 @@ name: Track ticket prices
 
 on:  
   workflow_dispatch:
-  schedule:
-    # Every ~15 minutes at off-peak UTC minutes (more reliable than */15).
-    - cron: "2,17,32,47 * * * *"
 
 permissions:
   contents: write
