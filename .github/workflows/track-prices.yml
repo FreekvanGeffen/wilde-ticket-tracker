@@ -2,6 +2,9 @@ name: Track ticket prices
 
 on:  
   workflow_dispatch:
+  schedule:
+    # Every ~15 minutes at off-peak UTC minutes (more reliable than */15).
+    - cron: "2,17,32,47 * * * *"
 
 permissions:
   contents: write
@@ -36,17 +39,17 @@ jobs:
       - name: Install Playwright Chromium
         run: uv run playwright install --with-deps chromium
 
-      - name: Run price tracker
-        run: uv run python ticket_price_tracker.py --csv ticket_price_history.csv
+      - name: Run Lowlands Ticketmaster price tracker
+        run: uv run python lowlands_ticket_price_tracker.py --csv lowlands_ticket_price_history.csv
 
       - name: Commit updated history
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add ticket_price_history.csv
+          git add lowlands_ticket_price_history.csv
           if git diff --staged --quiet; then
             echo "No CSV changes to commit."
             exit 0
           fi
-          git commit -m "chore: update ticket price history [skip ci]"
+          git commit -m "chore: update Lowlands ticket price history [skip ci]"
           git push

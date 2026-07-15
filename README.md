@@ -1,8 +1,10 @@
-# Wildeburg Ticket Price Tracker
+# Ticket Price Trackers
 
-Tracks the lowest **Weekend + Camping** resale price and sold-ticket count from Paylogic, every 15 minutes via GitHub Actions (free on public repos).
+Tracks ticket prices every 15 minutes via GitHub Actions (free on public repos).
 
-## Results
+## Wildeburg (Paylogic resale)
+
+Tracks the lowest **Weekend + Camping** resale price and sold-ticket count from Paylogic.
 
 History is stored in [`ticket_price_history.csv`](ticket_price_history.csv):
 
@@ -11,6 +13,18 @@ History is stored in [`ticket_price_history.csv`](ticket_price_history.csv):
 - `lowest_price_eur`
 - `sold_tickets`
 - `available_tickets` — counted by how often `statiegeld` appears on the page (one per listed ticket)
+
+## Lowlands 2026 (Ticketmaster verified resale)
+
+Tracks verified resale listings for the Lowlands 2026 festivalticket on Ticketmaster NL.
+
+History is stored in [`lowlands_ticket_price_history.csv`](lowlands_ticket_price_history.csv):
+
+- `date` — Amsterdam date (`YYYY-MM-DD`)
+- `time` — Amsterdam time (`HH:MM:SS`)
+- `lowest_resale_price_eur` — lowest verified resale listing price
+- `available_resale_tickets` — total tickets available across all verified resale listings
+- `primary_price_eur` — face-value price shown for new tickets
 
 ## GitHub Actions setup (free)
 
@@ -50,4 +64,5 @@ After that, the workflow runs every 15 minutes and commits new rows to `ticket_p
 uv sync
 uv run playwright install chromium
 uv run python ticket_price_tracker.py
+uv run python lowlands_ticket_price_tracker.py
 ```

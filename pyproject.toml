@@ -1,7 +1,7 @@
 [project]
 name = "wildeburg-ticket-tracker"
 version = "0.1.0"
-description = "Track Wildeburg resale ticket prices"
+description = "Track Wildeburg and Lowlands ticket prices"
 requires-python = ">=3.12"
 dependencies = [
     "playwright==1.61.0",
